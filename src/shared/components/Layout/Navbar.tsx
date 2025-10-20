@@ -19,7 +19,6 @@ const Navbar: React.FC<NavbarProps> = ({ onMenuToggle }) => {
   const { unreadMessages } = useUnreadMessages();
   const navigate = useNavigate();
 
-  // Check authentication status on component mount
   useEffect(() => {
     const token = localStorage.getItem("token");
     const userData = localStorage.getItem("user");

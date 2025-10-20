@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { BarChart, FileText, Settings, Home, ChevronRight, ChevronDown, HelpCircle,Building2  } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
+import { ChevronRight, ChevronDown, TestTube } from 'lucide-react';
 import { useLanguage } from '../../../hooks/useLanguage';
 
 interface SidebarProps {
@@ -19,110 +18,38 @@ interface MenuItem {
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
-  const { t } = useTranslation();
   const { isRTL } = useLanguage();
   const location = useLocation();
   
   const [expandedMenus, setExpandedMenus] = useState<Record<string, boolean>>({
-    '/reports': true 
+    '/testing': true // Expand testing menu by default
   });
 
-  const user = JSON.parse(localStorage.getItem("user") || "null");
-  const isAdmin = user?.email === "admin.tickets@gmail.com";
-  const isSuperAdmin = user?.email === "super.admin@gmail.com";
 
   const menuItems: MenuItem[] = [
-    // {
-    //   name: t('home.title') || 'الرئيسية',
-    //   path: '/',
-    //   icon: <Home className="h-5 w-5" />
-    // },
-    // {
-    //   name: t('reports.title') || 'تقارير المعدات',
-    //   path: '/reports',
-    //   icon: <Building2 className="h-5 w-5" />,
-    //   subItems: [
-    //     {
-    //       name: t('reports.mekyas') || 'تقارير مقياس',
-    //       path: '/reports/mekyas'
-    //     },
-    //     {
-    //       name:  "jadeer reports",
-    //       path: '/reports/jadeer'
-    //     },
-    //     {
-    //       name: t('reports.manual') || 'تقارير مقياس',
-    //       path: '/reports/manual'
-    //     },
-        
-    //     {
-    //       name: t('reports.view') || 'عرض التقارير',
-    //       path: '/reports/view'
-    //     },
-    //     {
-    //       name: "Manual Report and Send Upload",
-    //       path: "/reports/newManual"
-    //     },
-    //     {
-    //       name: t('reports.noqra') || 'تقارير نقرة',
-    //       path: '/reports/noqra'
-    //     },
-    //   ]
-    // },
-
-    
     {
-      name: t('equipment.title') || 'تقارير المعدات',
-      path: '/equipment',
-      icon: <FileText className="h-5 w-5" />,
+      name: 'Testing Environment',
+      path: '/testing',
+      icon: <TestTube className="h-5 w-5" />,
       subItems: [
         {
-          name: 'Upload With ID',
-          path: '/equipment/reportID'
+          name: 'Excel Test',
+          path: '/'
         },
         {
-          name: 'Manual Creation',
-          path: '/equipment/manualEquipReport'
-        },
-        // {
-        //   name: t('equipment.tab2') || 'جميع التقارير',
-        //   path: '/equipment/allReports'
-        // },
-        {
-          name: "Create Report Excel",
-          path: "/equipment/createReport"
+          name: 'Get Test',
+          path: '/testing/get'
         },
         {
-          name: "View Reports",
-          path: "/equipment/viewReports"
+          name: 'Taqeem Login Test',
+          path: '/testing/taqeem-login'
+        },
+        {
+          name: 'Navigate and Upload Test',
+          path: '/testing/navigate-upload'
         }
       ]
     },
-    ...(isSuperAdmin ? [{
-      name: t('dashboard.title') || 'لوحة الإدارة',
-      path: '/dashboard',
-      icon: <BarChart className="h-5 w-5" />
-    }] : []),
-    // {
-    //   name: t('settings.title') || 'إعدادات المستخدم',
-    //   path: '/settings',
-    //   icon: <Settings className="h-5 w-5" />
-    // },
-    {
-      name: t('support.title') || 'المساعدة والدعم',
-      path: '/support',
-      icon: <HelpCircle className="h-5 w-5" />
-    },
-    {
-      name: t('navbar.userSettings') || t('settings.title') || 'User Settings',
-      path: '/settings',
-      icon: <Settings className="h-5 w-5" />
-    },
-    ...(isAdmin ? [{
-      name: t('All Tickets') || 'جميع التذاكر',
-      path: '/support/tickets',
-      icon: <FileText className="h-5 w-5" />
-    }] : [])
   ];
 
   const isActive = (path: string) => location.pathname === path;

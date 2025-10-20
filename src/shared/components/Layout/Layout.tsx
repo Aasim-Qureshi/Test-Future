@@ -23,7 +23,7 @@ const Layout: React.FC<LayoutProps> = ({
     <div className="min-h-screen bg-gray-50 flex flex-col" dir={isRTL ? 'rtl' : 'ltr'}>
       <Navbar onMenuToggle={() => setSidebarOpen(!sidebarOpen)} />
       <div className="flex flex-1 w-screen max-w-screen overflow-x-hidden">
-        <Sidebar isOpen={sidebarOpen} /> {/* fixed width, e.g., w-64 */}
+        <Sidebar isOpen={sidebarOpen} />
         <main className="flex-1 min-w-0 p-4 md:p-6 overflow-x-auto">
           {children}
         </main>

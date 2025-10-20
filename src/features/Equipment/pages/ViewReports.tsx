@@ -352,16 +352,6 @@ const ViewEquipmentReports: React.FC = () => {
         updateProgress(reportId, { paused: false, message: 'Resumed' });
     };
 
-    const handleStop = async (reportId: string) => {
-        if (!socket || !isConnected) return;
-        socket.emit('stop_form_fill', { reportId });
-        updateProgress(reportId, { stopped: true, message: 'Stopping...' });
-
-        const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
-        await delay(500);
-        clearProgress(reportId);
-    };
-
     const toggleDropdown = (reportId: string) => {
         setOpenReports(prev => ({ ...prev, [reportId]: !prev[reportId] }));
         setDropdownOpen(prev => ({ ...prev, [reportId]: !prev[reportId] }));

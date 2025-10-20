@@ -1,10 +1,8 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
 import { Globe } from 'lucide-react';
 import { useLanguage } from '../../../hooks/useLanguage';
 
 const LanguageToggle: React.FC = () => {
-  const { t } = useTranslation();
   const { language, toggleLanguage, isRTL } = useLanguage();
 
   // Add default values and null checks
